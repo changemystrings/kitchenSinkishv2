@@ -1,0 +1,8 @@
+<div>Here is the homepage for users</div>
+<input type="text" ng-model="search" class="search-query" style="width: 80px">
+<button type="submit" class="btn">Search</button>
+<ul>
+  <li ng-repeat="user in users | filter:search">
+    {{user.name}}
+  </li>
+</ul>

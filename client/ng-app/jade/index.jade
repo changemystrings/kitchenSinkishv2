@@ -1,0 +1,81 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="description", content="")
+    meta(name="author", content="")
+    link(rel="shortcut icon", href="../../docs-assets/ico/favicon.png")
+    title kitchen-sinkish code example
+    // Bootstrap core CSS
+    link(href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", rel="stylesheet")
+    link(href="ng-app/css/jasny-bootstrap.min.css", rel="stylesheet")
+    // Custom styles for this template
+    link(href="ng-app/css/navbar-offcanvas.css", rel="stylesheet")
+    link(href="ng-app/transitions.css", rel="stylesheet")
+    link(href="ng-app/css/bootstrap-overrides.css", rel="stylesheet")
+    link(href="ng-app/css/styles.css", rel="stylesheet")
+    // Just for debugging purposes. Don't actually copy this line!
+    //if lt IE 9
+      script(src="../../docs-assets/js/ie8-responsive-file-warning.js")
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js")
+      script(src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js")
+  body(ng-app='kitchen-sinkish')
+    .container-full
+      // Static navbar
+      .navbar.navbar-fixed-top.navbar-default
+        .navbar-header
+          button.navbar-toggle(type="button", data-toggle="offcanvas", data-target=".navbar-offcanvas", data-canvas="body")
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href="#") KITCHEN SINKISH
+          //.navmenu-fixed-left Use this class to force a menu push from the left
+        .navbar-offcanvas.offcanvas
+          a.navmenu-brand(href="#") kitchen-sinkish
+          ul.nav.navbar-nav
+            li.dropdown
+              a.dropdown-toggle(href="", data-toggle="dropdown")
+                | GO HERE FIRST!!!
+                b.caret
+              ul.dropdown-menu
+                li
+                  a(ui-sref="about") About
+                li
+                  a.canvas-switch(ui-sref="users") Users
+                li
+                  a(href="#") Architecture
+                li
+                  a(href="#") Code Respositories
+                li
+                  a(href="#") Credits ('Cos They're Due')
+            li.dropdown
+              a.dropdown-toggle(href="#", data-toggle="dropdown")
+                | API Examples
+                b.caret
+              ul.dropdown-menu
+                li
+                  a(href="#") Google Freebase
+                li
+                  a(href="#") Stack Overflow
+            li
+              a(href="#") Ninja Cats (Really)
+            li.active
+              a(href="./") Off canvas navbar
+      // Main component for a primary marketing message or call to action
+      .container-full(ui-view)
+    // /container
+    script(src="https://code.jquery.com/jquery-1.10.2.min.js")
+    script(src="//netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js")
+    script(src="ng-app/js/jasny-bootstrap.min.js")
+    script(src="http://code.angularjs.org/1.2.13/angular.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js")
+    //script(src="ng-app/js/angular-animate.min.js")
+    script(src="ng-app/app.js")
+    script(src="ng-app/home/home.js")
+    script(src="ng-app/users/users.js")
+    script(src="ng-app/js/offcanvas.js")
+
