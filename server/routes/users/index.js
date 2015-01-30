@@ -5,7 +5,6 @@ module.exports = function (app,passport) {
   app.get('/users/create', function (req, res) {
     var user = new User();
     user.name = 'user2';
-    user.property2 = 'second prop';
     user.save();
     res.send('respond with a resource');
   });

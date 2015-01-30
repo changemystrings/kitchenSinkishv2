@@ -13,7 +13,7 @@ html(lang="en")
     link(href="ng-app/css/jasny-bootstrap.min.css", rel="stylesheet")
     // Custom styles for this template
     link(href="ng-app/css/navbar-offcanvas.css", rel="stylesheet")
-    link(href="ng-app/transitions.css", rel="stylesheet")
+    link(href="ng-app/css/transitions.css", rel="stylesheet")
     link(href="ng-app/css/bootstrap-overrides.css", rel="stylesheet")
     link(href="ng-app/css/styles.css", rel="stylesheet")
     // Just for debugging purposes. Don't actually copy this line!
@@ -47,6 +47,8 @@ html(lang="en")
                 li
                   a.canvas-switch(ui-sref="users") Users
                 li
+                  a.canvas-switch(ui-sref="auth") Auth
+                li
                   a(href="#") Architecture
                 li
                   a(href="#") Code Respositories
@@ -77,5 +79,6 @@ html(lang="en")
     script(src="ng-app/app.js")
     script(src="ng-app/home/home.js")
     script(src="ng-app/users/users.js")
+    script(src="ng-app/auth/auth.js")
     script(src="ng-app/js/offcanvas.js")
 

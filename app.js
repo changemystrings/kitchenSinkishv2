@@ -1,4 +1,5 @@
-/* Gather Dependencies */
+
+var authToken;
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -6,33 +7,33 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var jwt = require('jwt-simple');
+var jwtSecret = 'f#fa^^bAG@VBd';
 
 //Mongoose for MongoDB
 var mongoose = require('mongoose');
 var uristring =
   process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL ||
   //'mongodb://localhost/kitchen-sinkish' ||
-  'mongodb://kitchen-sinkish-web:oh2leave@ds051640.mongolab.com:51640/kitchen-sinkish';
+  'mongodb://kitchen-sink-app:y0gabbagabba@ds027771.mongolab.com:27771/kitchen-sink-app';
 mongoose.connect(uristring);
+
 //Mongoose models
 var User = require('./server/models/user');
 
 //Passport Authentication and flash messaging
 var passport = require('passport');
-passport.check = 'yep';
+require('passport-local');
 var session = require('express-session');
 var flash = require('connect-flash');
-/* End Dependencies */
 
 
 // view engine setup
-//app.set('views', path.join(__dirname, 'views'));
+// default overridden to point to angular folder
 app.set('views', path.join(__dirname, 'client/ng-app/jade'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
+
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -48,26 +49,16 @@ app.use(passport.session());
 app.use(flash());
 
 //Routes for the app
-//
-
+require('./server/passport/local.js')(passport);
 require('./server/routes/home')(app,passport);
-//var users = require('./server/routes/users');
 require('./server/routes/users')(app,passport);
-
-//app.all()
-//app.use('/', routes);//(app,passport);
-//app.use('/users', users);
-//catch all
-app.get('*', function (req, res) {
+require('./server/routes/auth/signup.js')(app,passport);
+require('./server/routes/auth/authenticate.js')(app,passport);
+require('./server/routes/auth/auth-handler.js')(app,passport);
+//catch all - non-api routes are sent back to angular for ui-router to handle
+app.all('*', function (req, res) {
   res.render('index', {title: 'Express'});
 });
-
-app.use(User);
-
-//app.get('/', function(req, res) {
-//  res.sendfile('./client/ng-app/views/home/index.hba'); // load the single view file (angular will handle the page changes on the front-end)
-//});
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -81,6 +72,7 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
+        console.log(err);
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,

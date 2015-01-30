@@ -4,6 +4,7 @@ angular.module('kitchen-sinkish', [
   //'uiRouterSample.utils.service',
   'kitchen-sinkish.home',
   'kitchen-sinkish.users',
+  'kitchen-sinkish.auth',
   'ui.router'
   //'ngAnimate'
 ])

@@ -3,6 +3,6 @@
 <button type="submit" class="btn">Search</button>
 <ul>
   <li ng-repeat="user in users | filter:search">
-    {{user.name}}
+    {{user.local.email}}
   </li>
 </ul>
