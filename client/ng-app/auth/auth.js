@@ -29,7 +29,11 @@ angular.module('kitchen-sinkish.auth', [
 
   .controller('AuthHomeCtrl', ['$scope', '$stateParams', '$state', '$http', function ($scope, $stateParams, $state, $http) {
 
-    //$scope.formData = {};
+    //Need to intercept the tab click - otherwise ui-router will attempt to route to new state
+      $('.nav-tabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      });
     $scope.signUpLocal = function () {
 
       $http(
