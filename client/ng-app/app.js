@@ -17,8 +17,18 @@ angular.module('kitchen-sinkish', [
       // so that you can access them from any scope within your applications.For example,
       // <li ng-class="{ active: $state.includes('contacts.list') }"> will set the <li>
       // to active whenever 'contacts.list' or one of its descendents is active.
+      $rootScope.$authStatusClient = false;
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
+      $rootScope.$on('$stateChangeSuccess', function(event, state) {
+        if ($state.current.name != 'home' && $state.current.name != 'auth')
+        {
+          if ($rootScope.$authStatusClient == false) {
+          $state.go('auth');
+          }
+        }
+      });
+
     }
   ]
 )
@@ -50,31 +60,7 @@ angular.module('kitchen-sinkish', [
       // Use $stateProvider to configure your states.
       $stateProvider
 
-        //////////
-        // Home //
-        //////////
 
-        ///////////
-        // About //
-        ///////////
-
-        /*.state('about', {
-          url: '/about',
-
-          // Showing off how you could return a promise from templateProvider
-          templateProvider: ['$timeout',
-            function (        $timeout) {
-              return $timeout(function () {
-                return '<p class="lead">UI-Router Resources</p><ul>' +
-                  '<li><a href="https://github.com/angular-ui/ui-router/tree/master/sample">Source for this Sample</a></li>' +
-                  '<li><a href="https://github.com/angular-ui/ui-router">Github Main Page</a></li>' +
-                  '<li><a href="https://github.com/angular-ui/ui-router#quick-start">Quick Start</a></li>' +
-                  '<li><a href="https://github.com/angular-ui/ui-router/wiki">In-Depth Guide</a></li>' +
-                  '<li><a href="https://github.com/angular-ui/ui-router/wiki/Quick-Reference">API Reference</a></li>' +
-                  '</ul>';
-              }, 100);
-            }]
-        })*/
     }
   ]
 )

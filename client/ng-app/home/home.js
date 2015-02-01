@@ -29,7 +29,7 @@ angular.module('kitchen-sinkish.home', [
           // the index.html file. So this template will be inserted into the
           // ui-view within index.html.
           //template: '<p class="lead">The users page</p>'
-          templateUrl: "ng-app/home/home.html",
+          templateUrl: "ng-app/home/home.html"
           //controller: 'UsersCtrl'
 
         })

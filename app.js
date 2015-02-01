@@ -7,8 +7,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var jwt = require('jwt-simple');
-var jwtSecret = 'f#fa^^bAG@VBd';
+//var jwt = require('jwt-simple');
+//var jwtSecret = 'f#fa^^bAG@VBd';
 
 //Mongoose for MongoDB
 var mongoose = require('mongoose');

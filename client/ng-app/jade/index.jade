@@ -3,13 +3,14 @@ html(lang="en")
   head
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
     meta(name="description", content="")
     meta(name="author", content="")
     link(rel="shortcut icon", href="../../docs-assets/ico/favicon.png")
     title kitchen-sinkish code example
     // Bootstrap core CSS
-    link(href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", rel="stylesheet")
+    //link(href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", rel="stylesheet")
+    link(href="ng-app/css/bootstrap-flatly.min.css", rel="stylesheet")
     link(href="ng-app/css/jasny-bootstrap.min.css", rel="stylesheet")
     // Custom styles for this template
     link(href="ng-app/css/navbar-offcanvas.css", rel="stylesheet")
@@ -35,11 +36,11 @@ html(lang="en")
           a.navbar-brand(href="#") KITCHEN SINKISH
           //.navmenu-fixed-left Use this class to force a menu push from the left
         .navbar-offcanvas.offcanvas
-          a.navmenu-brand(href="#") kitchen-sinkish
+          a.navmenu-brand.canvas-switch(href="#") HOME
           ul.nav.navbar-nav
             li.dropdown
               a.dropdown-toggle(href="", data-toggle="dropdown")
-                | GO HERE FIRST!!!
+                | Start Here
                 b.caret
               ul.dropdown-menu
                 li
@@ -65,7 +66,7 @@ html(lang="en")
                   a(href="#") Stack Overflow
             li
               a(href="#") Ninja Cats (Really)
-            li.active
+            li
               a(href="./") Off canvas navbar
       // Main component for a primary marketing message or call to action
       .container-full(ui-view)
@@ -77,6 +78,8 @@ html(lang="en")
     script(src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js")
     //script(src="ng-app/js/angular-animate.min.js")
     script(src="ng-app/app.js")
+    script(src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js")
+    script(src="ng-app/js/respond.min.js")
     script(src="ng-app/home/home.js")
     script(src="ng-app/users/users.js")
     script(src="ng-app/auth/auth.js")

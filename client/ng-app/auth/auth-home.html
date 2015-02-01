@@ -1,49 +1,84 @@
 <!-- TODO - Place the login/signup forms into a tab control -->
-<div role="tabpanel" style="margin-top:50px;">
-
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Sign-In</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
-  </ul>
-
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="home">...</div>
-    <div role="tabpanel" class="tab-pane" id="profile">...</div>
-  </div>
-
-</div>
-<!--
-
-
--->
-<div style="margin-top: 50px;" class="container">
-  <!--<div class="row">-->
-    <form ng-submit="signUpLocal()" class="form-horizontal">
-      <div class="form-group form-group-lg">
-        Signup
-        <br />
-        <!--<label class="col-sm-2 control-label" for="iptSignupEmail">Sigunup</label>-->
-        <div class="col-sm-10">
-          <input class="form-control" id="iptSignupEmail" name="email" placeholder="Email" type="text"
-                 ng-model="email"/>
+<div class="container">
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3 text-center">
+        <div role="tabpanel" style="margin-top:50px;">
+            <!-- Tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#sign-in" aria-controls="sign-in" role="tab"
+                                                          data-toggle="tab">Sign-In</a></li>
+                <li role="presentation"><a href="#register" aria-controls="register" role="tab" data-toggle="tab">Register</a>
+                </li>
+            </ul>
+            <!-- Tab content -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="sign-in" style="margin-top:50px;">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <form name="frmAuthenticateLocal" ng-submit="authenticateLocal()" class="form-horizontal">
+                                <div class="form-group form-group-sm">
+                                    <label for="iptLoginEmail">Email:</label>
+                                    <div class="col-xs-12">
+                                        <input class="form-control" id="iptLoginEmail" name="email" placeholder=""
+                                               type="email" required ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"
+                                               ng-model="loginEmail"/>
+                                    </div>
+                                    <span class="text-danger" ng-show="frmAuthenticateLocal.email.$error.required">Required </span>
+                                    <span class="text-danger" ng-show="frmAuthenticateLocal.email.$error.pattern">Invalid Email</span>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="iptLoginPwd">Password:</label>
+                                    <div class="col-xs-12">
+                                        <input class="form-control" id="iptLoginPwd" name="password" placeholder="" required
+                                               type="password"
+                                               ng-model="loginPassword">
+                                    </div>
+                                    <span class="text-danger" ng-show="frmAuthenticateLocal.password.$error.required">Required </span>
+                                </div>
+                                <br />
+                                <div class="col-xs-12">
+                                    <input type="submit" class="btn btn-warning" ng-disabled="frmAuthenticateLocal.email.$error.pattern || frmAuthenticateLocal.email.$error.required || frmAuthenticateLocal.password.$error.required" value="Sign-In"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane text-center" id="register"  style="margin-top: 50px;">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                        <form ng-submit="signUpLocal()" class="form-horizontal" name="frmSignupLocal">
+                            <div class="form-group form-group-sm">
+                                <label for="iptSignupEmail">Email:</label>
+                                <div class="col-xs-12">
+                                    <input class="form-control" id="iptSignupEmail" name="email" placeholder=""
+                                           type="email" required ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"
+                                           ng-model="email"/>
+                                </div>
+                                <span class="text-danger" ng-show="frmSignupLocal.email.$error.required">Required </span>
+                                <span class="text-danger" ng-show="frmSignupLocal.email.$error.pattern">Invalid Email</span>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="iptSignupPwd">Password:</label>
+                            <div class="col-xs-12">
+                                <input class="form-control" id="iptSignupPwd" name="password" placeholder=""
+                                       type="password" required
+                                       ng-model="password">
+                            </div>
+                                <span class="text-danger" ng-show="frmSignupLocal.password.$error.required">Required </span>
+                            </div>
+                            <br />
+                            <div class="col-xs-12">
+                            <input type="submit" class="btn btn-warning" ng-disabled="frmSignupLocal.email.$error.pattern || frmSignupLocal.email.$error.required || frmSignupLocal.password.$error.required" value="Register" />
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-xs-4">
-        <input class="form-control" id="iptSignupPwd" name="password" placeholder="Password" type="password"
-               ng-model="password">
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-  <!--</div>-->
+    </div>
 </div>
-<div style="margin-top: 50px;" class="container">
-  <form ng-submit="authenticateLocal()">
-    <label>Login</label>
-    <input id="iptLoginEmail" placeholder="Email" type="text" ng-model="loginEmail"/>
-    <input id="iptLoginPwd" placeholder="Password" type="password" ng-model="loginPassword">
-    <button type="submit">Submit</button>
-  </form>
 </div>
+
+
 <div id="divAuthMessage">{{authMessage}}</div>
