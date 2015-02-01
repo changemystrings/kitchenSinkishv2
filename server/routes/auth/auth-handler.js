@@ -18,7 +18,7 @@ module.exports = function (app, passport) {
   //redirect target when a user has a successful login attempt
   app.get('/auth/authenticate/success', function (req, res) {
       authMessage.authStatus = true;
-      authMessage.message = "Congratulations - you've logged in";
+      authMessage.message = "Congratulations - Passport.js says you're authenticated";
       res.json(authMessage);
   });
 

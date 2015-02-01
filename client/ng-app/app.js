@@ -10,8 +10,8 @@ angular.module('kitchen-sinkish', [
 ])
 
   .run(
-  [          '$rootScope', '$state', '$stateParams',
-    function ($rootScope,   $state,   $stateParams) {
+  [          '$rootScope', '$state', '$stateParams', 'UserService',
+    function ($rootScope,   $state,   $stateParams, UserService) {
 
       // It's very handy to add references to $state and $stateParams to the $rootScope
       // so that you can access them from any scope within your applications.For example,
@@ -20,18 +20,30 @@ angular.module('kitchen-sinkish', [
       $rootScope.$authStatusClient = false;
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
-      $rootScope.$on('$stateChangeSuccess', function(event, state) {
-        if ($state.current.name != 'home' && $state.current.name != 'auth')
-        {
-          if ($rootScope.$authStatusClient == false) {
+      $rootScope.$user = UserService;
+      $rootScope.clientProtected = function() {
+        if (this.$authStatusClient == false) {
           $state.go('auth');
-          }
         }
-      });
+      }
+
 
     }
   ]
 )
+    .service('UserService', function($state) {
+      var user = {
+        authStatus: false,
+        username: 'Guest',
+        userId: '',
+        authorize: function authorizeState () {
+          if (user.authStatus === false) {
+            $state.go('auth');
+          }
+        }
+      };
+      return user;
+    })
 
   .config(
   [          '$stateProvider', '$urlRouterProvider',

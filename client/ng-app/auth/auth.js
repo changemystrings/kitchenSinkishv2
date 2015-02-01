@@ -27,7 +27,7 @@ angular.module('kitchen-sinkish.auth', [
   ]
 )
 
-  .controller('AuthHomeCtrl', ['$scope', '$stateParams', '$state', '$http', '$rootScope', function ($scope, $stateParams, $state, $http, $rootScope) {
+  .controller('AuthHomeCtrl', ['$scope', '$stateParams', '$state', '$http', '$rootScope', 'UserService', function ($scope, $stateParams, $state, $http, $rootScope, UserService) {
 
     //Need to intercept the tab click - otherwise ui-router will attempt to route to new state
       $('.nav-tabs a').click(function (e) {
@@ -44,6 +44,7 @@ angular.module('kitchen-sinkish.auth', [
         }
       )
         .success(function (data, status, headers, config) {
+            UserService.authStatus = true;
           $scope.authMessage = data.message;
         })
         .error(function () {
@@ -62,7 +63,7 @@ angular.module('kitchen-sinkish.auth', [
         .success(function (data, status, headers, config) {
             $scope.authMessage = data.message;
             if (data.authStatus == true) {
-              $rootScope.$authStatusClient = true;
+              UserService.authStatus = true;
               sessionStorage.setItem('authStatus','true');
             }
         })
