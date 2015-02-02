@@ -35,7 +35,7 @@ angular.module('kitchen-sinkish.auth', [
         $(this).tab('show')
       });
     $scope.signUpLocal = function () {
-
+      $scope.authMessage = null;
       $http(
         {
           method: 'post',
