@@ -39,7 +39,7 @@ angular.module('kitchen-sinkish.users', [
 
     .controller('UsersCtrl', ['$scope', '$stateParams', '$state', '$http', 'UserService', function ($scope, $stateParams, $state, $http, UserService) {
         //$rootScope.clientProtected();
-        UserService.authorize();
+        UserService.authorize('auth');
         $http.get('/users').
             success(function (data, status, headers, config) {
                 $scope.users = data;

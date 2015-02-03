@@ -1,4 +1,4 @@
-module.exports = function (app,passport) {
+module.exports = function (app,passport,apiData) {
   var User = require('../../models/user');
 
 //POST create new user
@@ -11,6 +11,7 @@ module.exports = function (app,passport) {
 
 //GET existing users
   app.get('/users', function (req, res) {
+    var sess = req.session;
       User.find(function (err, users) {
         if (err)
           res.send(err);

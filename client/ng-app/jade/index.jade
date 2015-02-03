@@ -65,11 +65,11 @@ html(lang="en")
                 li
                   a(href="#") Stack Overflow
             li
-              a(href="#") Ninja Cats (Really)
-            li
-              a(href="./") Off canvas navbar
-            li(ng-show="$user.authStatus")
               a Welcome {{$user.username}}
+            li(ng-show="$user.authStatus == 'true'")
+              a(ui-sref="logout") Logout
+            li(ng-show="$user.authStatus !== 'true'")
+              a(ui-sref="auth") Login/Register
       // Main component for a primary marketing message or call to action
       .container-full(ui-view)
     // /container

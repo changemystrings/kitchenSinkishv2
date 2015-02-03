@@ -33,13 +33,17 @@ angular.module('kitchen-sinkish', [
 )
     .service('UserService', function($state) {
       var user = {
-        authStatus: false,
+        authStatus: sessionStorage.getItem('authStatus'),
         username: 'Guest',
         userId: '',
-        authorize: function authorizeState () {
-          if (user.authStatus === false) {
-            $state.go('auth');
+        authorize: function authorizeState (newState) {
+          console.log(user.authStatus);
+          if (user.authStatus != 'true') {
+            $state.go(newState);
           }
+        },
+        setLocalAuth: function (authStatus) {
+          sessionStorage.setItem('authStatus',authStatus)
         }
       };
       return user;

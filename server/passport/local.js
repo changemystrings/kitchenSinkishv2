@@ -33,15 +33,16 @@ module.exports = function(passport) {
             return done(err);
           }
           if (user) {
-            console.log('user already exists')
             return done(null, false, req.flash('signupMessage', 'Sorry, user already exists.'));
           } else {
             var newUser = new User();
             newUser.local.email    = email;
             newUser.local.password = newUser.generateHash(password);
+            newUser.nickname = req.body.username;
             newUser.save(function(err) {
               if (err)
                 throw err;
+              req.session.currentUser = newUser;
               return done(null, newUser);
             });
           }
@@ -76,6 +77,7 @@ module.exports = function(passport) {
         /*
         TODO - Set JWT
          */
+        req.session.currentUser = user;
         return done(null, user, req.flash('loginMesssage','success'));
       });
       });

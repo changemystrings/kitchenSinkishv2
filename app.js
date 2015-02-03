@@ -7,8 +7,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-//var jwt = require('jwt-simple');
-//var jwtSecret = 'f#fa^^bAG@VBd';
 
 //Mongoose for MongoDB
 var mongoose = require('mongoose');
@@ -23,7 +21,6 @@ var User = require('./server/models/user');
 
 //Passport Authentication and flash messaging
 var passport = require('passport');
-require('passport-local');
 var session = require('express-session');
 var flash = require('connect-flash');
 
@@ -47,14 +44,16 @@ app.use(session( {secret: 'f%g!!ScgYs&5d' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
+//Base object for API calls
+var apiData = require('./server/models/apiData')(app,passport);
 //Routes for the app
 require('./server/passport/local.js')(passport);
 require('./server/routes/home')(app,passport);
-require('./server/routes/users')(app,passport);
+require('./server/routes/users')(app,passport,apiData);
 require('./server/routes/auth/signup.js')(app,passport);
 require('./server/routes/auth/authenticate.js')(app,passport);
-require('./server/routes/auth/auth-handler.js')(app,passport);
+require('./server/routes/auth/auth-handler.js')(app,passport,apiData);
+require('./server/routes/auth/logout.js')(app,passport,apiData);
 //catch all - non-api routes are sent back to angular for ui-router to handle
 app.all('*', function (req, res) {
   res.render('index', {title: 'Express'});

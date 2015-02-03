@@ -2,17 +2,28 @@
 
 module.exports = function (app, passport) {
     var apiData = {
-        currentUser: req.session.currentUser,
+        currentUser: {},
         http: {
-            statusCode: res.status,
+            statusCode: '',
             statusText: ''
         },
         jsonData: {
             data: {},
-            message: ''
-        }
+            message: '',
+            authStatus: ''
+        },
+        userIsAuthenticated: false
     };
-
-    return new apiData();
-
+    app.use(function(req, res, next) {
+        apiData.currentUser = req.session.currentUser;
+        if(apiData.currentUser) {
+            apiData.currentUser.local.password = '';
+            apiData.currentUser.local.email = '';
+        }
+        if (req.isAuthenticated()) {
+            apiData.userIsAuthenticated = true;
+        }
+        next();
+    })
+    return apiData;
 }

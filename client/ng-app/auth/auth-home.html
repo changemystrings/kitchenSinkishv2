@@ -37,7 +37,7 @@
                                 </div>
                                 <br />
                                 <div class="col-xs-12">
-                                    <input type="submit" class="btn btn-warning" ng-disabled="frmAuthenticateLocal.email.$error.pattern || frmAuthenticateLocal.email.$error.required || frmAuthenticateLocal.password.$error.required" value="Sign-In"/>
+                                    <input type="submit" class="btn btn-warning" ng-disabled="$user.authStatus == 'true' || frmAuthenticateLocal.email.$error.pattern || frmAuthenticateLocal.email.$error.required || frmAuthenticateLocal.password.$error.required" value="Sign-In"/>
                                 </div>
                             </form>
                         </div>
@@ -58,6 +58,15 @@
                                 <span class="text-danger" ng-show="frmSignupLocal.email.$error.pattern">Invalid Email</span>
                             </div>
                             <div class="form-group form-group-sm">
+                                <label for="iptSignupUsername">Username:</label>
+                                <div class="col-xs-12">
+                                    <input class="form-control" id="iptSignupUsername" name="username" placeholder=""
+                                           type="input" required
+                                           ng-model="username"/>
+                                </div>
+                                <span class="text-danger" ng-show="frmSignupLocal.username.$error.required">Required </span>
+                            </div>
+                            <div class="form-group form-group-sm">
                                 <label for="iptSignupPwd">Password:</label>
                             <div class="col-xs-12">
                                 <input class="form-control" id="iptSignupPwd" name="password" placeholder=""
@@ -68,7 +77,8 @@
                             </div>
                             <br />
                             <div class="col-xs-12">
-                            <input type="submit" class="btn btn-warning" ng-disabled="frmSignupLocal.email.$error.pattern || frmSignupLocal.email.$error.required || frmSignupLocal.password.$error.required" value="Register" />
+                            <input type="submit" class="btn btn-warning" ng-disabled="$user.authStatus == 'true' || frmSignupLocal.email.$error.pattern || frmSignupLocal.email.$error.required || frmSignupLocal.password.$error.required"
+                                   value="Register" />
                             </div>
                         </form>
                         </div>
