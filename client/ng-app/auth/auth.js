@@ -19,9 +19,10 @@ angular.module('kitchen-sinkish.auth', [
         //////////
 
         .state("auth", {
-          url: "/auth",
+          url: "/auth?logout",
           templateUrl: "ng-app/auth/auth-home.html",
-          controller: 'AuthHomeCtrl'
+          controller: 'AuthHomeCtrl',
+            stateParams: {'logout': '0'}
         })
           .state("logout", {
             url: "/logout",
@@ -38,6 +39,10 @@ angular.module('kitchen-sinkish.auth', [
         e.preventDefault()
         $(this).tab('show')
       });
+      if ($stateParams.logout == '1')
+      {
+        $scope.authMessage = 'Successfully logged out'
+      }
     $scope.signUpLocal = function () {
       $scope.authMessage = null;
       $http(
@@ -100,8 +105,7 @@ angular.module('kitchen-sinkish.auth', [
                 UserService.authStatus = data.jsonData.authStatus.toString();
                 UserService.username = 'Guest';
                 UserService.setLocalAuth(data.jsonData.authStatus.toString());
-                $scope.authMessage = data.jsonData.message;
-                $state.go('auth');
+                $state.go('auth', {logout: '1'});
               }
 
             })
