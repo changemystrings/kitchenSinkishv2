@@ -64,8 +64,8 @@ html(lang="en")
                   a(href="#") Google Freebase
                 li
                   a(href="#") Stack Overflow
-            li
-              a Welcome {{$user.username}}
+            li(ng-show="$user.authStatus == 'true'")
+              a(ui-sref="profile") Welcome {{$user.username}}
             li(ng-show="$user.authStatus == 'true'")
               a(ui-sref="logout") Logout
             li(ng-show="$user.authStatus !== 'true'")

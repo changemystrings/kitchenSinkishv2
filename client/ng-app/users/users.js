@@ -42,7 +42,7 @@ angular.module('kitchen-sinkish.users', [
         UserService.authorize('auth');
         $http.get('/users').
             success(function (data, status, headers, config) {
-                $scope.users = data;
+                $scope.users = data.jsonData.data;
             }).
             error(function (data, status, headers, config) {
                 $scope.users = ["John", "Jane"];
