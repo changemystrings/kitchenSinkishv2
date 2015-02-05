@@ -2,6 +2,8 @@
 
 module.exports = function (app, passport) {
     //This object is attached to each response
+    //Need to use prototype here to clean values or return new from function
+
     var apiData = {
         currentUser: {},
         http: {
@@ -12,9 +14,7 @@ module.exports = function (app, passport) {
             //Holds the data objects returned from the API
             data: {},
             //Holds a one-time message that be leveraged upon receiving response
-            message: '',
-            //Deprecated - replaced by userIsAuthenticated property on root object
-            authStatus: ''
+            message: ''
         },
         //true if request passed to secureRoute() function
         requestRequiresAuthentication: false,
@@ -31,7 +31,7 @@ module.exports = function (app, passport) {
 
     };
     app.use(function(req, res, next) {
-        //Attaches entire user object and strips sensitive information
+        //Attaches user object and strips sensitive information
         apiData.currentUser = req.session.currentUser;
         if(apiData.currentUser) {
             apiData.currentUser.local.password = '';
