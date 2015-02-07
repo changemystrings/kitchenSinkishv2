@@ -3,17 +3,18 @@ module.exports = function (app, passport, apiData) {
     //POST authenticate a user using passport local strategy
     app.post('/auth/logout',
         function (req,res) {
+            var apiDataObj = new apiData();
             req.logout();
             if (!req.isAuthenticated())
             {
-                apiData.jsonData.authStatus = false;
-                apiData.jsonData.message = 'You have been logged out';
+                apiDataObj.jsonData.authStatus = false;
+                apiDataObj.jsonData.message = 'You have been logged out';
             }
             else {
-                apiData.jsonData.authStatus = true;
-                apiData.jsonData.message = 'The application was unable to log you out';
+                apiDataObj.jsonData.authStatus = true;
+                apiDataObj.jsonData.message = 'The application was unable to log you out';
             }
-            res.json(apiData);
+            res.json(apiDataObj);
         }
     );
 }

@@ -45,14 +45,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 //Base object for API calls
+//var apiDataBase = require('./server/models/apiDataBase.js')(app,passport);
 var apiData = require('./server/models/apiData')(app,passport);
+
 //var secureRoute = require('./server/utility/secureRoute')(app,passport);
 //Routes for the app
 require('./server/passport/local.js')(passport);
 require('./server/routes/home')(app,passport);
 require('./server/routes/users')(app,passport,apiData);
 require('./server/routes/auth/signup.js')(app,passport);
-require('./server/routes/auth/authenticate.js')(app,passport);
+require('./server/routes/auth/authenticate.js')(app,passport,apiData);
 require('./server/routes/auth/auth-handler.js')(app,passport,apiData);
 require('./server/routes/auth/logout.js')(app,passport,apiData);
 //catch all - non-api routes are sent back to angular for ui-router to handle
