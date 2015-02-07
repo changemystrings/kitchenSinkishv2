@@ -13,12 +13,42 @@ div.navbar-offcanvas.offcanvas.in.canvas-slid .dropdown-menu li:hover {backgroun
 div.navbar-offcanvas.offcanvas.in.canvas-slid .dropdown-menu a:hover {background-color: #2c3e50 !important;}
 /*Overrides the link properties for bootstrap tabs */
 ul.nav-tabs > li > a { color: #9acfea;}
+
+
+body {
+    padding-top:60px;
+}
+
+@media (max-width: 979px) {
+    body {
+        padding-top: 40px;
+    }
+}
+/*#viewContainerMain {
+    margin-top: 60px;
+}
+
+
+@media (max-width: 400px) {
+    #viewContainerMain {
+        margin-top: 20px;
+    }
+}*/
+
+
+
 /*Overrides jumbotron on homepage */
 #hmJumobotron {
   background-color: #9acfea !important;
   text-align: center;
-  margin-bottom: 0px;
 }
+
+/*@media (max-width: 979px) {
+    #hmJumobotron {
+        padding-top: 0px;
+    }
+}*/
+
 #hmJumobotron h1 {color: #fff;}
 #hmJumobotron h2 {
   color: #778899;
@@ -27,7 +57,6 @@ ul.nav-tabs > li > a { color: #9acfea;}
 #hmJumbotronMission {
   background-color: #2c3e50;
   /*background-color: #23527c;*/
-  margin-top: 0px;
   text-align: center;
   color: #fff;
 }

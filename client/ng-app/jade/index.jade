@@ -25,7 +25,7 @@ html(lang="en")
       script(src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js")
       script(src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js")
   body(ng-app='kitchen-sinkish')
-    .container-full
+    .container-full-a
       // Static navbar
       .navbar.navbar-fixed-top.navbar-default
         .navbar-header
@@ -71,7 +71,7 @@ html(lang="en")
             li(ng-show="$user.authStatus !== 'true'")
               a(ui-sref="auth") Login/Register
       // Main component for a primary marketing message or call to action
-      .container-full(ui-view)
+      #viewContainerMain.container-full(ui-view)
     // /container
     script(src="https://code.jquery.com/jquery-1.10.2.min.js")
     script(src="//netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js")
