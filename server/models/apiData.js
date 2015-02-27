@@ -32,7 +32,9 @@ module.exports = function (app, passport) {
             },
             processRoute: function (req, isProtected, roleName) {
                 if (req.session) {
-                    this.currentUser = req.session.currentUser ? req.session.currentUser : {nickname: 'Unauthenticated'}
+                    if (this.currentUser.nickname) {
+                    this.currentUser.nickname = req.session.currentUser.nickname ? req.session.currentUser.nickname : {nickname: 'Unauthenticated'}
+                    }
                 }
                 if (isProtected === true) {
                     this.requestRequiresAuthentication = true;

@@ -1,6 +1,5 @@
 module.exports = function (app,passport,apiData) {
   var User = require('../../models/user');
-  //var security = require('../../utility/secureRoute');
 
 //GET existing users
   app.get('/users', function (req, res) {
@@ -12,7 +11,7 @@ module.exports = function (app,passport,apiData) {
           if (err) {
             res.send(err);
           }
-            apiObj.jsonData.data = users;
+            apiObj.jsonData = users;
             res.json(apiObj);
         });
       }
