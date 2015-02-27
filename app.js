@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var uristring =
   process.env.MONGOLAB_URI ||
-  //'mongodb://localhost/kitchen-sinkish' ||
+  'mongodb://localhost/kitchen-sinkish' ||
   'mongodb://kitchen-sink-app:y0gabbagabba@ds027771.mongolab.com:27771/kitchen-sink-app';
 mongoose.connect(uristring);
 

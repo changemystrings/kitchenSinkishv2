@@ -34,8 +34,9 @@ angular.module('kitchen-sinkish.users', [
     ]
 )
 
-    .controller('UsersCtrl', ['$scope', '$stateParams', '$state', '$http', 'UserService', 'ApiService', function ($scope, $stateParams, $state, $http, UserService, ApiService) {
-        UserService.authorize('auth');
+    .controller('UsersCtrl', ['$scope', '$stateParams', '$state', '$http', 'UserService', 'ApiService', 'PreviousState', function ($scope, $stateParams, $state, $http, UserService, ApiService, PreviousState) {
+        console.log($state.current.name + ' - users.js:38');
+        UserService.authorize('auth',$state.current.name);
             ApiService.makeApiCall('/users', 'GET', null)
                 .then( function(apiResponse) {
                     //console.log(apiResponse);

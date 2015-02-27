@@ -3,7 +3,10 @@ module.exports = function (app, passport) {
     //Need to use prototype here to clean values or return new from function
     var ApiDataRoot = function apiDataRoot(req) {
         var apiData = {
-            currentUser: {},
+            currentUser: {
+                nickname: null,
+                userId: null
+            },
             http: {
                 statusCode: '',
                 statusText: ''
@@ -26,7 +29,7 @@ module.exports = function (app, passport) {
             //the role required to access the resource
             requiredRoleForRequest: null,
             applyUser: function (req){
-                if (req.session) {
+                if (req.session.currentUser) {
                     this.currentUser = req.session.currentUser ? req.session.currentUser : {nickname: 'Unauthenticated'}
                 }
             },

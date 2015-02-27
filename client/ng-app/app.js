@@ -33,9 +33,18 @@ angular.module('kitchen-sinkish', [
             username: 'Guest',
             userId: '',
             //This function is purely for the UI - api routes are protected on the server
-            authorize: function authorizeState(newState) {
+            authorize: function authorizeState(newState,returnState) {
                 if (user.authStatus != 'true') {
-                    $state.go(newState);
+                    console.log(returnState + ' -app.js:38')
+                    var returnStateObj = {};
+                    if (returnState) {
+
+                        returnStateObj.r = returnState.toString();
+                        $state.go(newState, returnStateObj);
+                    }
+                    else {
+                        $state.go(newState, returnStateObj);
+                    }
                 }
             },
             setLocalAuth: function (authStatus) {
@@ -73,7 +82,7 @@ angular.module('kitchen-sinkish', [
                         if (data.userIsAuthenticated == false)
                         {
                             UserService.setLocalAuth('false');
-                            UserService.authorize('auth');
+                            //UserService.authorize('auth');
                         }
                         def.resolve(data);
                     })
@@ -81,7 +90,7 @@ angular.module('kitchen-sinkish', [
                         if (data.userIsAuthenticated == false)
                         {
                             UserService.setLocalAuth('false');
-                            UserService.authorize('auth');
+                            //UserService.authorize('auth');
                         }
                         def.resolve(data);
                     })
