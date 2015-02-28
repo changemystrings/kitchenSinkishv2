@@ -1,11 +1,10 @@
-module.exports = function (app, passport, apiData) {
-
+module.exports = function (app, passport, apiData, configData) {
 
     //redirect target when a new user signs up successfully
     app.get('/auth/signup/success', function (req, res) {
         //var apiData = req.apiData;
         var apiObj = new apiData().processRoute(req, false, null);
-        apiObj.jsonData.message = 'Congratulations - signup successful';
+        apiObj.jsonData.message = configData.apiMessageStrings.signupSuccesful;
         apiObj.jsonData.authStatus = true;
         res.json(apiObj);
     });
@@ -14,7 +13,7 @@ module.exports = function (app, passport, apiData) {
     app.get('/auth/signup/failure', function (req, res) {
         //var apiData = req.apiData;
         var apiObj = new apiData().processRoute(req, false, null);
-        apiObj.jsonData.message = 'Sorry, that email or username is already in use';
+        apiObj.jsonData.message = configData.apiMessageStrings.signupUnavailable;
         apiObj.jsonData.authStatus = false;
         res.json(apiObj);
     });
@@ -24,7 +23,7 @@ module.exports = function (app, passport, apiData) {
         //var apiData = req.apiData;
         var apiObj = new apiData().processRoute(req, false, null);
         apiObj.jsonData.authStatus = true;
-        apiObj.jsonData.message = "Congratulations - Passport.js says you're authenticated";
+        apiObj.jsonData.message = configData.apiMessageStrings.loginSuccessful;
         res.json(apiObj);
     });
 
@@ -33,7 +32,7 @@ module.exports = function (app, passport, apiData) {
         //var apiData = req.apiData;
         var apiObj = new apiData().processRoute(req, false, null);
         apiObj.jsonData.authStatus = false;
-        apiObj.jsonData.message = "Incorrect username or password - please try again";
+        apiObj.jsonData.message = configData.apiMessageStrings.incorrectCredentials;
         res.json(apiObj);
     });
 }

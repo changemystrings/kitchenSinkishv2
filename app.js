@@ -47,6 +47,7 @@ app.use(flash());
 
 //Base object for API calls
 var apiData = require('./server/models/apiData')(app,passport);
+var configData = require('./server/utility/config')(app);
 
 //Routes for the app
 require('./server/passport/local.js')(passport,apiData);
@@ -54,7 +55,7 @@ require('./server/routes/home')(app,passport,apiData);
 require('./server/routes/users')(app,passport,apiData);
 require('./server/routes/auth/signup.js')(app,passport,apiData);
 require('./server/routes/auth/authenticate.js')(app,passport,apiData);
-require('./server/routes/auth/auth-handler.js')(app,passport,apiData);
+require('./server/routes/auth/auth-handler.js')(app,passport,apiData,configData);
 require('./server/routes/auth/logout.js')(app,passport,apiData);
 //catch all - non-api routes are sent back to angular for ui-router to handle
 app.all('*', function (req, res) {

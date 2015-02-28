@@ -2,8 +2,8 @@
 <div>Here is the homepage for users</div>
 <input type="text" ng-model="search" class="search-query" style="width: 80px">
 <ul>
-  <li ng-repeat="user in users | filter:search">
-    {{user.local.email}}
+  <li ng-repeat="user in users | filter:search" style="text-align: center">
+      <div>{{user.local.email}}</div>
   </li>
 </ul>
 </div>
