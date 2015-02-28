@@ -35,14 +35,10 @@ angular.module('kitchen-sinkish.users', [
 )
 
     .controller('UsersCtrl', ['$scope', '$stateParams', '$state', '$http', 'UserService', 'ApiService', 'PreviousState', function ($scope, $stateParams, $state, $http, UserService, ApiService, PreviousState) {
-        console.log($state.current.name + ' - users.js:38');
         UserService.authorize('auth',$state.current.name);
-            ApiService.makeApiCall('/users', 'GET', null)
+            ApiService.makeApiCall('/users', UserService.constants.stringValues.httpGetMethodString, null)
                 .then( function(apiResponse) {
-                    //console.log(apiResponse);
                     $scope.users = apiResponse.jsonData;
                 }
             );
-        //console.log($scope.users);
-        //$scope.users = apiResponse.jsonData.data;
     }]);

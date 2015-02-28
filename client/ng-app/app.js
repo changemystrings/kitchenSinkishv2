@@ -13,29 +13,22 @@ angular.module('kitchen-sinkish', [
             // so that you can access them from any scope within your applications.For example,
             // <li ng-class="{ active: $state.includes('contacts.list') }"> will set the <li>
             // to active whenever 'contacts.list' or one of its descendents is active.
-            $rootScope.$authStatusClient = UserService.authStatus === 'true' ? true : false;
+            $rootScope.$authStatusClient = UserService.authStatus === UserService.constants.stringValues.authStatusTrue ? true : false;
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
             $rootScope.$user = UserService;
-            $rootScope.clientProtected = function () {
-                if (this.$authStatusClient == false) {
-                    $state.go('auth');
-                }
-            }
-
-
         }
     ]
 )
-    .service('UserService', function ($state) {
+    .service('UserService',['ConstantsService', '$state', function (ConstantsService,$state) {
         var user = {
-            authStatus: sessionStorage.getItem('authStatus'),
-            username: 'Guest',
+            constants: ConstantsService,
+            authStatus: sessionStorage.getItem(ConstantsService.sessionStorageKeys.authStatus),
+            username: ConstantsService.stringValues.defaultUsername,
             userId: '',
             //This function is purely for the UI - api routes are protected on the server
             authorize: function authorizeState(newState,returnState) {
-                if (user.authStatus != 'true') {
-                    console.log(returnState + ' -app.js:38')
+                if (user.authStatus != ConstantsService.stringValues.authStatusTrue) {
                     var returnStateObj = {};
                     if (returnState) {
 
@@ -49,10 +42,31 @@ angular.module('kitchen-sinkish', [
             },
             setLocalAuth: function (authStatus) {
                 this.authStatus = authStatus;
-                sessionStorage.setItem('authStatus', authStatus)
+                sessionStorage.setItem(ConstantsService.sessionStorageKeys.authStatus, authStatus)
             }
         };
         return user;
+    }])
+    .service('ConstantsService', function ($state) {
+        var config = {
+            stringValues: {
+                authStatusTrue: 'true',
+                authStatusFalse: 'false',
+                defaultUsername: 'Guest',
+                logoutQueryParam: '1',
+                logoutSuccessMessage: 'Successfully Logged Out',
+                loginRegisterPrompt: 'Please Login or Register',
+                genericRequestError: 'There was an error processing your request',
+                httpGetMethodString: 'GET',
+                httpPostMethodString: 'POST',
+                httpPutMethodString: 'PUT',
+                httpDeleteMethodString: 'DELETE'
+            },
+            sessionStorageKeys: {
+                authStatus: 'authStatus'
+            }
+        };
+        return config;
     })
     //This factory wraps the standard angular $http object with specifics for app API
     .factory('ApiService',
@@ -81,16 +95,14 @@ angular.module('kitchen-sinkish', [
                     .success(function (data) {
                         if (data.userIsAuthenticated == false)
                         {
-                            UserService.setLocalAuth('false');
-                            //UserService.authorize('auth');
+                            UserService.setLocalAuth(UserService.constants.stringValues.authStatusFalse);
                         }
                         def.resolve(data);
                     })
                     .error(function (data) {
                         if (data.userIsAuthenticated == false)
                         {
-                            UserService.setLocalAuth('false');
-                            //UserService.authorize('auth');
+                            UserService.setLocalAuth(UserService.constants.stringValues.authStatusFalse);
                         }
                         def.resolve(data);
                     })

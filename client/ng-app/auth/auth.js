@@ -39,11 +39,11 @@ angular.module('kitchen-sinkish.auth', [
             e.preventDefault()
             $(this).tab('show')
         });
-        if ($stateParams.logout == '1') {
-            $scope.authMessage = 'Successfully logged out'
+        if ($stateParams.logout == UserService.constants.stringValues.logoutQueryParam) {
+            $scope.authMessage = UserService.constants.stringValues.logoutSuccessMessage;
         }
         if ($stateParams.r) {
-            $scope.authMessage = 'Please login or register'
+            $scope.authMessage = UserService.constants.stringValues.loginRegisterPrompt;
         }
         $scope.signUpLocal = function () {
             $scope.authMessage = null;
@@ -57,9 +57,9 @@ angular.module('kitchen-sinkish.auth', [
                 .success(function (data, status, headers, config) {
                     $scope.authMessage = data.jsonData.message;
                     if (data.jsonData.authStatus == true) {
-                        UserService.authStatus = 'true';
+                        UserService.authStatus = UserService.constants.stringValues.authStatusTrue;
                         UserService.username = data.currentUser.nickname;
-                        UserService.setLocalAuth('true');
+                        UserService.setLocalAuth(UserService.constants.stringValues.authStatusTrue);
 
                         if ($stateParams.r) {
                             $state.go($stateParams.r);
@@ -83,9 +83,9 @@ angular.module('kitchen-sinkish.auth', [
                 .success(function (data, status, headers, config) {
                     $scope.authMessage = data.jsonData.message;
                     if (data.jsonData.authStatus == true) {
-                        UserService.authStatus = 'true';
+                        UserService.authStatus = UserService.constants.stringValues.authStatusTrue;
                         UserService.username = data.currentUser.nickname;
-                        UserService.setLocalAuth('true');
+                        UserService.setLocalAuth(UserService.constants.stringValues.authStatusTrue);
                         if ($stateParams.r) {
                             $state.go($stateParams.r);
                         }
@@ -93,7 +93,7 @@ angular.module('kitchen-sinkish.auth', [
                 })
                 .error(function () {
                     //TODO Change this to redirect to error state
-                    $scope.authMessage = 'There was an error processing your request';
+                    $scope.authMessage = UserService.constants.stringValues.genericRequestError;
                 })
         };
     }])
@@ -115,15 +115,15 @@ angular.module('kitchen-sinkish.auth', [
             .success(function (data, status, headers, config) {
                 if (data.jsonData.authStatus == false) {
                     UserService.authStatus = data.jsonData.authStatus.toString();
-                    UserService.username = 'Guest';
+                    UserService.username = UserService.constants.stringValues.defaultUsername;
                     UserService.setLocalAuth(data.jsonData.authStatus.toString());
-                    $state.go('auth', {logout: '1'});
+                    $state.go('auth', {logout: UserService.constants.stringValues.logoutQueryParam});
                 }
 
             })
             .error(function () {
                 //TODO Change this to redirect to error state
-                $scope.authMessage = 'There was an error processing your request';
+                $scope.authMessage = UserService.constants.stringValues.genericRequestError;
             })
 
 
