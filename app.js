@@ -10,10 +10,11 @@ var bodyParser = require('body-parser');
 
 //Mongoose for MongoDB
 var mongoose = require('mongoose');
-var uristring =
+var uristring = 'mongodb://ksweb:pw@ds027771.mlab.com:27771/kitchen-sink-app' ||
   process.env.MONGOLAB_URI ||
-  'mongodb://localhost/kitchen-sinkish' ||
-  'mongodb://kitchen-sink-app:y0gabbagabba@ds027771.mongolab.com:27771/kitchen-sink-app';
+  'mongodb://kitchen-sink-app:Th3S1nk@ds027771.mlab.com:27771/kitchen-sink-app' ||
+  'mongodb://localhost/kitchen-sinkish';
+
 mongoose.connect(uristring);
 
 //Mongoose models
